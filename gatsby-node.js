@@ -1,6 +1,8 @@
 const { createFilePath } = require("gatsby-source-filesystem")
 const path = require("path")
+const languages = ["en", "ko"]
 
+const basicPages = new Map()
 // Programmatically create the pages for browsing blog posts (Create Page!)
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
@@ -12,7 +14,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     query {
       allMdx(
         sort: { fields: [frontmatter___order], order: ASC }
-        filter: { frontmatter: { type: { eq: "basic" }, lang: { eq: "ko" } } }
+        filter: { frontmatter: { type: { eq: "basic" } } }
       ) {
         edges {
           node {
@@ -40,6 +42,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   // you'll call `createPage` for each result
   resultsBasic.data.allMdx.edges.forEach(({ node }, index) => {
     let slug = node.fields.slug
+    basicPages.set(`${slug}`, {})
+    let originalPath = slug.substr(3)
+    console.log("originalPath", originalPath)
     createPage({
       path: slug,
       // This component will wrap our MDX content
@@ -50,6 +55,14 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         prev: index - 1,
         next: index + 1,
         type: "basic",
+        intl: {
+          language: node.frontmatter.lang,
+          languages,
+          // messages,
+          routed: true,
+          originalPath,
+          redirect: false,
+        },
       },
     })
   })
@@ -68,7 +81,7 @@ exports.onCreateNode = async ({
   if (node.internal.type === "Mdx") {
     const value = createFilePath({ node, getNode })
     const newSlug =
-      "/" + node.frontmatter.lang + "-55" + "/clone-apple-music/basic" + value
+      "/" + node.frontmatter.lang + "/clone-apple-music/basic" + value
     createNodeField({
       // Individual MDX node
       node,
@@ -77,5 +90,18 @@ exports.onCreateNode = async ({
       // Generated value based on filepath with "blog" prefix
       value: newSlug,
     })
+  }
+}
+
+// remove duplicated init pages
+exports.onCreatePage = async ({ page, actions }) => {
+  const { createPage, deletePage } = actions
+  // console.log('page.context.type', page.context.type)
+  const isBasicPage = page.context.type === "basic"
+  const hasInvalidBlogPath = !basicPages.has(page.path)
+
+  // If page is a blog page but has the wrong path
+  if (isBasicPage && hasInvalidBlogPath) {
+    deletePage(page)
   }
 }
