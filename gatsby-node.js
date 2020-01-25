@@ -1,3 +1,6 @@
+const { createFilePath } = require("gatsby-source-filesystem")
+const path = require("path")
+
 // Programmatically create the pages for browsing blog posts (Create Page!)
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
@@ -20,6 +23,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               author
               lang
             }
+            fields {
+              slug
+            }
           }
         }
       }
@@ -38,18 +44,18 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   // you'll call `createPage` for each result
   postsBasic.forEach(({ node }, index) => {
-    console.log("create!", index)
-    console.log("node.frontmatter", node.frontmatter)
-    console.log("node.fields.slug", node.fields.slug)
+    // console.log("create!", index)
+    // console.log("node.frontmatter", node.frontmatter)
+    // console.log("node.fields.slug", node.fields.slug)
 
     const newPath =
       "/" +
       node.frontmatter.lang +
       "-55" +
-      "/clone-apple-music" +
+      "/clone-apple-music/basic" +
       node.fields.slug
+
     console.log("newPath", newPath)
-    basicPages.set(`${newPath}`, {})
     createPage({
       // This is the slug you created before
       // (or `node.frontmatter.slug`)
@@ -67,4 +73,27 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       },
     })
   })
+}
+
+// Create Slug!
+exports.onCreateNode = async ({
+  node,
+  actions,
+  getNode,
+  store,
+  cache,
+  createNodeId,
+}) => {
+  const { createNodeField, createNode } = actions
+  if (node.internal.type === "Mdx") {
+    const value = createFilePath({ node, getNode })
+    createNodeField({
+      // Individual MDX node
+      node,
+      // Name of the field you are adding
+      name: "slug",
+      // Generated value based on filepath with "blog" prefix
+      value,
+    })
+  }
 }
