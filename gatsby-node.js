@@ -36,31 +36,17 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     reporter.panicOnBuild(`🚨 Error while running GraphQL(resultsBasic) query.`)
     return
   }
-
   console.log("resultsBasic", resultsBasic)
-  const postsBasic = resultsBasic.data.allMdx.edges
-
-  // Create blog post pages.
-  console.log("postsBasic!@@@@@@@@@@@@@@", postsBasic)
-
   // you'll call `createPage` for each result
-  postsBasic.forEach(({ node }, index) => {
-    const newPath =
-      "/" +
-      node.frontmatter.lang +
-      "-55" +
-      "/clone-apple-music/basic" +
-      node.fields.slug
-    console.log("newPath", newPath)
-
-    console.log("node", node)
+  resultsBasic.data.allMdx.edges.forEach(({ node }, index) => {
+    let slug = node.fields.slug
     createPage({
-      path: newPath,
+      path: slug,
       // This component will wrap our MDX content
       component: path.resolve(`./src/templates/blog-post-layout.js`),
       context: {
         id: node.id,
-        slug: node.fields.slug,
+        slug: slug,
         prev: index - 1,
         next: index + 1,
         type: "basic",
@@ -81,13 +67,15 @@ exports.onCreateNode = async ({
   const { createNodeField, createNode } = actions
   if (node.internal.type === "Mdx") {
     const value = createFilePath({ node, getNode })
+    const newSlug =
+      "/" + node.frontmatter.lang + "-55" + "/clone-apple-music/basic" + value
     createNodeField({
       // Individual MDX node
       node,
       // Name of the field you are adding
       name: "slug",
       // Generated value based on filepath with "blog" prefix
-      value,
+      value: newSlug,
     })
   }
 }
