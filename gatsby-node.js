@@ -12,7 +12,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     query {
       allMdx(
         sort: { fields: [frontmatter___order], order: ASC }
-        filter: { frontmatter: { type: { eq: "basic" } } }
+        filter: { frontmatter: { type: { eq: "basic" }, lang: { eq: "ko" } } }
       ) {
         edges {
           node {
