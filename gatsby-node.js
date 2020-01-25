@@ -1,12 +1,11 @@
 const { createFilePath } = require("gatsby-source-filesystem")
 const path = require("path")
-const languages = ["en", "ko"]
+const languages = ["en", "ko"] // plugin options
 
 const basicPages = new Map()
 // Programmatically create the pages for browsing blog posts (Create Page!)
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
-
   /**
    * Basic Contents
    */
@@ -43,8 +42,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   resultsBasic.data.allMdx.edges.forEach(({ node }, index) => {
     let slug = node.fields.slug
     basicPages.set(`${slug}`, {})
-    let originalPath = slug.substr(3)
-    console.log("originalPath", originalPath)
     createPage({
       path: slug,
       // This component will wrap our MDX content
@@ -55,12 +52,13 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         prev: index - 1,
         next: index + 1,
         type: "basic",
+        // ADD INITL CONTEXT AT HERE
         intl: {
           language: node.frontmatter.lang,
           languages,
           // messages,
           routed: true,
-          originalPath,
+          originalPath: slug.substr(3), // remove front /en or /ko strings
           redirect: false,
         },
       },
