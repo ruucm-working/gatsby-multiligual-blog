@@ -1,0 +1,132 @@
+{
+  "title": "Harbor School",
+  "description": "Kick off your next, great Gatsby project with this default-starter-intl. This barebones starter ships with the main Gatsby configuration files you might need.",
+  "hello": "Hi people",
+  "welcome": "Welcome to your new Gatsby site.",
+  "title_page2": "Page two",
+  "hello_page2": "Hi from the second page",
+  "go_page2": "Go to page 2",
+  "build": "Now go build something great.",
+  "welcome_page2": "Welcome to page 2",
+  "go_back": "Go back to the homepage",
+  "sign_in": "Sign In/Up",
+  "logout": "Logout",
+  "access_denied": "Access Denied",
+  "notfound": {
+    "header": "NOT FOUND",
+    "description": "You just hit a route that doesn't exist... the sadness."
+  },
+  "header": {
+    "meun_one": "My Page",
+    "meun_two": "Become a Member"
+  },
+  "footer": {
+    "description": "This site, and our Design system made in Framer X. ©"
+  },
+  "home": {
+    "title": "Home",
+    "mission": {
+      "title": "We make your dream come true",
+      "sub": "Learn Framer X start from scratch to making whole Apple Music as same"
+    }
+  },
+  "product1": {
+    "title": "Clone Apple Music with Framer X (Basic)",
+    "description": "Learn Framer X start from scratch to making whole Apple Music as same",
+    "cta_text": "Try For Free"
+  },
+  "hello_framer_x": {
+    "title": "Hello, Framer X",
+    "description": "Framer X Class for Greedy Designers",
+    "cta_text": "Join"
+  },
+  "my_page": {
+    "title": "My Page",
+    "status_message": {
+      "subscribed": "Your now subscribe to membership plan",
+      "normal": "You're NOT subscribed to membership plan"
+    },
+    "subscribe": "Become a member",
+    "subscribe_sub": "and be a Harbor!",
+    "payment": "Payment",
+    "billing_interval": "Billing Interval",
+    "billing_history": "Billing History",
+    "cancel": "cancel",
+    "update": "Update",
+    "load_more": "Load More",
+    "cancel_subscription": "Cancel Subscription",
+    "cancel_unlimited_question_service": "Cancel Unlimited Question Service"
+  },
+  "inputs": {
+    "subscribe": "subscribe",
+    "email": {
+      "title": "E-MAIL",
+      "placeholder": "Put your e-mail address",
+      "subscribe": "Subscribe",
+      "sending": "Sending",
+      "error": "Error",
+      "success": "Success",
+      "label": "E-MAIL"
+    },
+    "card": "Card Number",
+    "unlimited": "Include Unlimited Question Service",
+    "billing_interval": {
+      "label": "Billing Interval",
+      "monthly": "Monthly",
+      "yearly": "Yearly"
+    }
+  },
+  "modals": {
+    "cancel": "No Thanks",
+    "sign_in": {
+      "title": "We’ll send you a link to your account.",
+      "confirm": "Sign In/Out"
+    },
+    "payment": {
+      "title": "Update Your Card",
+      "confirm": "Update"
+    },
+    "member": {
+      "desc": "You could easily join our membership that enables all contents of our site (including Apple Music Clone Framer X and more future contents)",
+      "confirm": "Update"
+    },
+    "billing_interval": {
+      "title": "BillingInterval",
+      "confirm": "Setting"
+    },
+    "cancel_subscription": {
+      "title": "Do you want to cancel your subscription?",
+      "confirm": "Cancel Subscription"
+    },
+    "cancel_unlimited": {
+      "title": "Do you want to cancel your unlimited question service?",
+      "confirm": "Cancel Service"
+    },
+    "done": {
+      "title": "Done",
+      "desc": "Check your mail box"
+    },
+    "thanks": {
+      "title": "Thanks",
+      "desc": "Check your mail box"
+    },
+    "welcome": {
+      "title": "Welcome",
+      "desc": "Sign Up Complete!"
+    },
+    "seeyou": {
+      "title": "Seeyou",
+      "desc": "Check your mail box"
+    },
+    "error": {
+      "title": "Error",
+      "desc": "Error"
+    }
+  },
+  "email": {
+    "member": {
+      "subject": "미입력",
+      "htmlString": "<h1>Test</h1> </br> <p>empty</p>"
+    }
+  }
+}
