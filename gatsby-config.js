@@ -71,7 +71,7 @@ module.exports = {
         // language file path
         defaultLanguage: `en`,
         // automatic redirection based on the user's preferred language in browser provided by browser-lang.
-        redirect: true,
+        redirect: false,
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality

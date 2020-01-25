@@ -12,7 +12,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     query {
       allMdx(
         sort: { fields: [frontmatter___order], order: ASC }
-        filter: { frontmatter: { type: { eq: "basic" }, lang: { eq: "ko" } } }
+        filter: { frontmatter: { type: { eq: "basic" } } }
       ) {
         edges {
           node {
@@ -37,6 +37,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return
   }
 
+  console.log("resultsBasic", resultsBasic)
   const postsBasic = resultsBasic.data.allMdx.edges
 
   // Create blog post pages.
@@ -52,6 +53,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       node.fields.slug
     console.log("newPath", newPath)
 
+    console.log("node", node)
     createPage({
       path: newPath,
       // This component will wrap our MDX content
