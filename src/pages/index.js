@@ -4,7 +4,7 @@ import { Link } from "gatsby"
 import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
-import { useIntl } from "gatsby-plugin-intl"
+import { useIntl, changeLocale } from "gatsby-plugin-intl"
 
 const IndexPage = () => {
   const intl = useIntl()
@@ -20,6 +20,24 @@ const IndexPage = () => {
       </div>
       <Link to="/page-2/">Go to page 2</Link> */}
       {intl.formatMessage({ id: "inputs.email.sending" })}
+
+      {intl.locale === "en" ? (
+        <button
+          onClick={() => {
+            changeLocale("ko")
+          }}
+        >
+          KO
+        </button>
+      ) : (
+        <button
+          onClick={() => {
+            changeLocale("en")
+          }}
+        >
+          EN
+        </button>
+      )}
     </Layout>
   )
 }
