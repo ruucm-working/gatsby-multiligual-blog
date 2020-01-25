@@ -44,26 +44,18 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   // you'll call `createPage` for each result
   postsBasic.forEach(({ node }, index) => {
-    // console.log("create!", index)
-    // console.log("node.frontmatter", node.frontmatter)
-    // console.log("node.fields.slug", node.fields.slug)
-
     const newPath =
       "/" +
       node.frontmatter.lang +
       "-55" +
       "/clone-apple-music/basic" +
       node.fields.slug
-
     console.log("newPath", newPath)
+
     createPage({
-      // This is the slug you created before
-      // (or `node.frontmatter.slug`)
       path: newPath,
       // This component will wrap our MDX content
       component: path.resolve(`./src/templates/blog-post-layout.js`),
-      // You can use the values in this context in
-      // our page layout component
       context: {
         id: node.id,
         slug: node.fields.slug,
