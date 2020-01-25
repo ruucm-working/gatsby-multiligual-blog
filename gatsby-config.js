@@ -6,11 +6,45 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-typescript`,
+    `gatsby-plugin-styled-components`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
         path: `${__dirname}/src/images`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `en-clone-apple-music-basic`,
+        path: `${__dirname}/content/en/clone-apple-music/basic`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `ko-clone-apple-music-basic`,
+        path: `${__dirname}/content/ko/clone-apple-music/basic`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        // Apply gatsby-mdx to both .mdx and .md files
+        extensions: [".mdx", ".md"],
+        gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 600,
+            },
+          },
+          {
+            resolve: `gatsby-remark-prismjs`,
+          },
+        ],
       },
     },
     `gatsby-transformer-sharp`,
