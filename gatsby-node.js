@@ -1,5 +1,6 @@
 const { createFilePath } = require("gatsby-source-filesystem")
 const path = require("path")
+// Plugin Options (Change This!)
 const intlPluginOptions = {
   languages: ["en", "ko"],
   sourcePath: "./src/intl/",
