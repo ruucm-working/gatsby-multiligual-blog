@@ -119,6 +119,7 @@ exports.onCreateNode = async ({
   if (node.internal.type === "Mdx") {
     const value = createFilePath({ node, getNode })
     const newSlug = `/${node.frontmatter.lang}/clone-apple-music/basic${value}`
+
     createNodeField({
       // Individual MDX node
       node,
@@ -126,6 +127,11 @@ exports.onCreateNode = async ({
       name: "slug",
       // Generated value based on filepath with "blog" prefix
       value: newSlug,
+    })
+    createNodeField({
+      node,
+      name: "filePath",
+      value: value,
     })
   }
 }
