@@ -1,6 +1,9 @@
 const { createFilePath } = require("gatsby-source-filesystem")
 const path = require("path")
-const languages = ["en", "ko"] // plugin options
+const intlPluginOptions = {
+  languages: ["en", "ko"],
+  sourcePath: "./src/intl/",
+}
 
 function flattenMessages(nestedMessages, prefix = "") {
   return Object.keys(nestedMessages).reduce((messages, key) => {
@@ -88,8 +91,11 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         // ADD INITL CONTEXT AT HERE
         intl: {
           language: node.frontmatter.lang,
-          languages,
-          messages: getMessages("./src/intl/", node.frontmatter.lang),
+          languages: intlPluginOptions.languages,
+          messages: getMessages(
+            intlPluginOptions.sourcePath,
+            node.frontmatter.lang
+          ),
           routed: true,
           originalPath: slug.substr(3), // remove front /en or /ko strings
           redirect: false,
