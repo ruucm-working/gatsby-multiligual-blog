@@ -2,10 +2,43 @@ const { createFilePath } = require("gatsby-source-filesystem")
 const path = require("path")
 const languages = ["en", "ko"] // plugin options
 
+function flattenMessages(nestedMessages, prefix = "") {
+  return Object.keys(nestedMessages).reduce((messages, key) => {
+    let value = nestedMessages[key]
+    let prefixedKey = prefix ? `${prefix}.${key}` : key
+
+    if (typeof value === "string") {
+      messages[prefixedKey] = value
+    } else {
+      Object.assign(messages, flattenMessages(value, prefixedKey))
+    }
+
+    return messages
+  }, {})
+}
+
 const basicPages = new Map()
 // Programmatically create the pages for browsing blog posts (Create Page!)
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
+  const getMessages = (path, language) => {
+    try {
+      // TODO load yaml here
+      const messages = require(`${path}/${language}.json`)
+
+      return flattenMessages(messages)
+    } catch (error) {
+      if (error.code === "MODULE_NOT_FOUND") {
+        process.env.NODE_ENV !== "test" &&
+          console.error(
+            `[gatsby-plugin-intl] couldn't find file "${path}/${language}.json"`
+          )
+      }
+
+      throw error
+    }
+  }
+
   /**
    * Basic Contents
    */
@@ -56,7 +89,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         intl: {
           language: node.frontmatter.lang,
           languages,
-          // messages,
+          messages: getMessages("./src/intl/", node.frontmatter.lang),
           routed: true,
           originalPath: slug.substr(3), // remove front /en or /ko strings
           redirect: false,

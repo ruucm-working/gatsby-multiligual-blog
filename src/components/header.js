@@ -32,6 +32,7 @@ const Header = ({ siteTitle }) => {
             {siteTitle}
           </Link>
         </h1>
+        <h1>{intl.formatMessage({ id: "title" })}</h1>
         {console.log("intl.locale", intl.locale)}
 
         {intl.locale === "en" ? (
